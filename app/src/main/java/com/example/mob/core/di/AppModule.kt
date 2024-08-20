@@ -2,7 +2,6 @@ package com.example.mob.core.di
 
 import android.content.Context
 import com.example.mob.core.service.AuthService
-import com.example.mob.core.service.StorageService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,11 +17,5 @@ class AppModule {
     @Singleton
     fun provideAuthService(@ApplicationContext context: Context): AuthService {
         return AuthService(context = context)
-    }
-
-    @Provides
-    @Singleton
-    fun provideStorageService(authService: AuthService): StorageService {
-        return StorageService(authService)
     }
 }
