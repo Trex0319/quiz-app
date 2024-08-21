@@ -1,9 +1,11 @@
 package com.example.mob.ui.register
 
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.mob.core.utils.UserRole
 import com.example.mob.ui.base.BaseFragment
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentRegisterBinding
@@ -18,6 +20,11 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
     override fun onBindView(view: View) {
         super.onBindView(view)
+
+        val roles = UserRole.entries.map { it.name }
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, roles)
+        binding?.stRole?.setAdapter(adapter)
+
         binding?.btnLogin?.setOnClickListener {
             findNavController().navigate(
                 RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
@@ -26,11 +33,16 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
 
         binding?.run {
             btnRegister.setOnClickListener {
+
+                val selectedRoleString = stRole.text.toString()
+                val selectedRole = UserRole.valueOf(selectedRoleString)
+
                 viewModel.register(
                     name = etName.text.toString(),
                     email = etEmail.text.toString(),
                     password = etPassword.text.toString(),
-                    confirmPassword = etConfirmPassword.text.toString()
+                    confirmPassword = etConfirmPassword.text.toString(),
+                    role = selectedRole.name
                 )
             }
         }

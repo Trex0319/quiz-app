@@ -89,7 +89,7 @@
             android:layout_marginBottom="8dp">
 
             <AutoCompleteTextView
-                android:id="@+id/actvCategory"
+                android:id="@+id/stRole"
                 style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

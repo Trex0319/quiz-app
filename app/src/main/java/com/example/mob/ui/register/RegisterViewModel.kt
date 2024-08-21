@@ -25,11 +25,12 @@ class RegisterViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
 
-    fun register(name: String, email: String, password: String, confirmPassword: String) {
+    fun register(name: String, email: String, password: String, confirmPassword: String, role: String) {
         val error = ValidationUtil.validate(
             ValidationField(name,"[a-zA-Z ]{2,20}", "Enter a valid name"),
             ValidationField(email,"[a-zA-Z0-9]+@[a-zA-Z0-9]+.[a-zA-Z0-9]+", "Enter a valid email"),
-            ValidationField(password,"[a-zA-Z0-9#$%]{6,20}", "Enter a valid password")
+            ValidationField(password,"[a-zA-Z0-9#$%]{6,20}", "Enter a valid password"),
+            ValidationField(role, "Teacher|Student", "Select a valid role")
         )
         if(error == null) {
             viewModelScope.launch(Dispatchers.IO) {
