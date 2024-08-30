@@ -3,4 +3,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="select_role">Select Role</string>
+    <string-array name="role_array">
+        <item>Teacher</item>
+        <item>Student</item>
+    </string-array>
+    <string name="you_want_to_log_out_action_cannot_be_undone">You want to log out? \nAction cannot be undone.</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="access">Access</string>
+    <string name="cancel">Cancel</string>
+    <string name="verifying">Verifying</string>
+    <string name="submit">Submit</string>
+    <string name="completed_quiz">Completed Quiz</string>
+    <string name="invalid_details">Invalid Details</string>
 </resources>

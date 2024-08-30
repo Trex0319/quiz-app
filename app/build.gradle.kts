@@ -22,9 +22,6 @@ android {
     }
 
     buildTypes {
-//        debug {
-//            buildConfigField("String", "oauth_client_id", "\"533323337480-9s5ecmjfkbmk6ra8kfuvkbdktbvq6d9b.apps.googleusercontent.com\"")
-//        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -43,6 +40,7 @@ android {
     buildFeatures {
         dataBinding = true
         buildConfig = true
+        viewBinding = true
     }
 }
 

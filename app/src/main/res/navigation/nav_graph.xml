@@ -8,8 +8,12 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.mob.ui.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_studentQuizFragment"
+            app:destination="@id/studentQuizFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.mob.ui.register.RegisterFragment"
@@ -19,8 +23,11 @@
             android:id="@+id/action_registerFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
+            android:id="@+id/actionRegisterToLogin"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/actionRegisterToDashboard"
+            app:destination="@id/dashboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -31,7 +38,49 @@
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
+            android:id="@+id/actionLoginToRegister"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/actionLoginToDashboard"
+            app:destination="@id/dashboardFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.mob.ui.dashboard.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_editQuizFragment"
+            app:destination="@id/editQuizFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_addQuizFragment"
+            app:destination="@id/addQuizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addQuizFragment"
+        android:name="com.example.mob.ui.teacher.quiz.AddQuizFragment"
+        android:label="fragment_add_quiz"
+        tools:layout="@layout/fragment_add_quiz" />
+    <fragment
+        android:id="@+id/editQuizFragment"
+        android:name="com.example.mob.ui.teacher.editQuiz.EditQuizFragment"
+        android:label="fragment_edit_quiz"
+        tools:layout="@layout/fragment_edit_quiz" >
+        <argument
+            android:name="quizId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editQuizFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studentQuizFragment"
+        android:name="com.example.mob.ui.student.StudentQuizFragment"
+        android:label="StudentQuizFragment"
+        tools:layout="@layout/fragment_student_quiz">
+    <argument
+        android:name="quizId"
+        app:argType="string" />
+    </fragment>
+
 </navigation>

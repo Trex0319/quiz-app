@@ -1,34 +1,241 @@
-<layout>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.mob.ui.home.HomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.screens.student.home.StudentHomeFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTodos"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="@dimen/xxs"/>
+        android:layout_marginTop="65sp">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/s"
-        android:layout_marginBottom="@dimen/s"
-        android:src="@drawable/ic_add"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAccessQuiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/s"
+            android:layout_marginVertical="@dimen/xxxxs"
+            android:layout_marginTop="65sp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:text="Quiz"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvContent"
-        android:textSize="@dimen/l"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nothing is add"/>
+        <TextView
+            android:id="@+id/tvRanking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Top Ranking"
+            android:layout_margin="@dimen/xl"
+            android:textStyle="bold"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAccessQuiz" />
 
-</FrameLayout>
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/m"
+            android:layout_marginVertical="16dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/tvRanking" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top3Container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/s"
+            android:layout_marginTop="@dimen/xl"
+            app:layout_constraintTop_toBottomOf="@+id/tvRanking">
+
+            <LinearLayout
+                android:id="@+id/firstPlaceLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivFirstPlace"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center|end"
+                    android:layout_marginHorizontal="@dimen/xs"
+                    android:src="@drawable/ic_person"
+                    android:contentDescription="TODO" />
+
+                <TextView
+                    android:id="@+id/tvFirstPlaceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/xxxxs"
+                    android:text="First Place"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvFirstPlaceScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="1000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/secondPlaceLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/xl"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toStartOf="@+id/firstPlaceLayout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivSecondPlace"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center|end"
+                    android:layout_marginHorizontal="@dimen/xs"
+                    android:src="@drawable/ic_person"
+                    android:contentDescription="TODO" />
+
+                <TextView
+                    android:id="@+id/tvSecondPlaceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/xxxxs"
+                    android:text="Second Place"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvSecondPlaceScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="600"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/thirdPlaceLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/xxxxxl"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/firstPlaceLayout"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivThirdPlace"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center|end"
+                    android:layout_marginHorizontal="@dimen/xs"
+                    android:src="@drawable/ic_person"
+                    android:contentDescription="TODO" />
+
+
+                <TextView
+                    android:id="@+id/tvThirdPlaceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/xxxxs"
+                    android:text="Third Place"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvThirdPlaceScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="800"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tvNoRanking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:gravity="center"
+            android:visibility="visible"
+            android:text="no have any ranking"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/rvRankings"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="@+id/rvRankings"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRankings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s"
+            android:layout_marginHorizontal="@dimen/l"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/top3Container" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/loading_overlay"
+            android:layout_width="250sp"
+            android:layout_height="250sp"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/black"
+            android:visibility="visible"
+            app:cardCornerRadius="@dimen/l"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ProgressBar
+                    android:layout_width="65sp"
+                    android:layout_height="65sp"
+                    android:indeterminateTint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tvLoadingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10sp"
+                    android:text="Verifying"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

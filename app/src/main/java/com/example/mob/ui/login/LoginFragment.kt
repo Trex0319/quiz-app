@@ -1,9 +1,11 @@
 package com.example.mob.ui.login
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.mob.core.utils.UserRole
 import com.example.mob.ui.base.BaseFragment
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentLoginBinding
@@ -22,7 +24,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
         binding?.btnRegister?.setOnClickListener {
             findNavController().navigate(
-                LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+                LoginFragmentDirections.actionLoginToRegister()
             )
         }
 
@@ -37,10 +39,25 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         super.onBindData(view)
 
         lifecycleScope.launch {
-            viewModel.success.collect {
-                findNavController().navigate(
-                    LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                )
+            viewModel.success.collect {role ->
+                when(role) {
+                    UserRole.Teacher ->findNavController().navigate(
+                        LoginFragmentDirections.actionLoginToDashboard()
+                    )
+                    UserRole.Student ->  findNavController().navigate(
+                        LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+                    )
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.isLoading.collect { isLoading ->
+                if (isLoading) {
+                    binding?.loadingOverlay?.isVisible = true
+                } else {
+                    binding?.loadingOverlay?.isVisible = false
+                }
             }
         }
     }

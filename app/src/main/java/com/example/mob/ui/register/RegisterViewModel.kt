@@ -2,6 +2,7 @@ package com.example.mob.ui.register
 
 import androidx.lifecycle.viewModelScope
 import com.example.mob.core.service.AuthService
+import com.example.mob.core.utils.UserRole
 import com.example.mob.core.utils.ValidationUtil
 import com.example.mob.data.model.User
 import com.example.mob.data.model.ValidationField
@@ -21,9 +22,7 @@ class RegisterViewModel @Inject constructor(
     private val authService: AuthService,
     private val userRepo: UserRepo
 ) : BaseViewModel() {
-    val success: MutableSharedFlow<Unit> = MutableSharedFlow()
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
 
     fun register(name: String, email: String, password: String, confirmPassword: String, role: String) {
         val error = ValidationUtil.validate(
@@ -32,18 +31,22 @@ class RegisterViewModel @Inject constructor(
             ValidationField(password,"[a-zA-Z0-9#$%]{6,20}", "Enter a valid password"),
             ValidationField(role, "Teacher|Student", "Select a valid role")
         )
+
         if(error == null) {
             viewModelScope.launch(Dispatchers.IO) {
-                _isLoading.emit(true)
+                val selectedRole = when (role) {
+                    "Teacher" -> UserRole.Teacher
+                    "Student" -> UserRole.Student
+                    else -> UserRole.Student
+                }
                 errorHandler {
                     authService.createUserWithEmailAndPass(email, password)
                 }?.let {
                     userRepo.createUser(
-                        User(name, email)
+                        User(name, email, selectedRole)
                     )
-                    success.emit(Unit)
+                    _success.emit(selectedRole)
                 }
-                _isLoading.emit(false)
             }
         } else {
             viewModelScope.launch {

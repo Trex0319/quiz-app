@@ -5,10 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.coroutines.tasks.await
 
-class AuthService(
-//    private val userRepo: UserRepo,
-    private val context: Context
-){
+class AuthService{
     private val auth =  FirebaseAuth.getInstance()
 
     suspend fun loginWithEmailAndPass(email: String, pass: String): FirebaseUser? {

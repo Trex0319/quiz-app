@@ -7,6 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.mob.core.utils.UserRole
 import com.example.mob.ui.base.BaseFragment
+import com.example.mob.ui.login.LoginFragmentDirections
 import com.example.quizapp.R
 import com.example.quizapp.databinding.FragmentRegisterBinding
 import com.google.android.material.snackbar.Snackbar
@@ -21,28 +22,35 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     override fun onBindView(view: View) {
         super.onBindView(view)
 
-        val roles = UserRole.entries.map { it.name }
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, roles)
-        binding?.stRole?.setAdapter(adapter)
+//        val roles = UserRole.entries.map { it.name }
+//        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, roles)
+//        binding?.stRole?.setAdapter(adapter)
 
         binding?.btnLogin?.setOnClickListener {
             findNavController().navigate(
-                RegisterFragmentDirections.actionRegisterFragmentToLoginFragment()
+                RegisterFragmentDirections.actionRegisterToLogin()
             )
         }
 
         binding?.run {
-            btnRegister.setOnClickListener {
 
-                val selectedRoleString = stRole.text.toString()
-                val selectedRole = UserRole.valueOf(selectedRoleString)
+            val role = ArrayAdapter.createFromResource(
+                requireContext(),
+                R.array.role_array,
+                android.R.layout.simple_dropdown_item_1line
+            )
+
+            role.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+            stRole.adapter = role
+
+            btnRegister.setOnClickListener {
 
                 viewModel.register(
                     name = etName.text.toString(),
                     email = etEmail.text.toString(),
                     password = etPassword.text.toString(),
                     confirmPassword = etConfirmPassword.text.toString(),
-                    role = selectedRole.name
+                    role = stRole.selectedItem.toString()
                 )
             }
         }
@@ -59,10 +67,15 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     override fun onBindData(view: View) {
         super.onBindData(view)
         lifecycleScope.launch {
-            viewModel.success.collect {
-                findNavController().navigate(
-                    RegisterFragmentDirections.actionRegisterFragmentToHomeFragment()
-                )
+            viewModel.success.collect {role ->
+                when(role) {
+                    UserRole.Teacher ->findNavController().navigate(
+                        RegisterFragmentDirections.actionRegisterToDashboard()
+                    )
+                    UserRole.Student ->  findNavController().navigate(
+                        RegisterFragmentDirections.actionRegisterFragmentToHomeFragment()
+                    )
+                }
             }
         }
     }
