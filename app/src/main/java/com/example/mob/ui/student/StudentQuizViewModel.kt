@@ -15,8 +15,8 @@ import javax.inject.Inject
 class StudentQuizViewModel @Inject constructor(
     private val quizRepo: QuizRepo,
     private val userRepo: UserRepo,
-    private val studentQuizRepo: StudentQuizRepo,
-    private val studentResultRepo: StudentResultRepo
+    private val completionRepo: StudentQuizRepo,
+    private val resultRepo: StudentResultRepo
 ) : BaseViewModel() {
     suspend fun getQuizById(quizId: String): Quiz? {
         return quizRepo.getQuizById(quizId)
@@ -40,26 +40,20 @@ class StudentQuizViewModel @Inject constructor(
     suspend fun saveResult(quizId: String, studentId: String, score: Int) {
         _isLoading.emit(true)
         try {
-            if (!studentResultRepo.hasResult(quizId, studentId)) {
-                val user = userRepo.getUserDetails(studentId)
-                val name = user?.name ?: "N/A"
+            if (resultRepo.hasResult(quizId, studentId)) return
 
-                val result = StudentResult(
+            resultRepo.addResult(
+                quizId,
+                studentId,
+                StudentResult(
                     studentId = studentId,
                     quizId = quizId,
                     score = score,
                     submittedAt = System.currentTimeMillis()
                 )
-                studentResultRepo.addResult(quizId, studentId, result)
-
-                val completion = StudentQuizCompletion(
-                    studentId = studentId,
-                    name = name,
-                    totalScore = score
-                )
-                studentQuizRepo.addCompletion(completion)
-                finish.emit(Unit)
-            }
+            )
+            completionRepo.addCompletion(StudentQuizCompletion(studentId, userRepo.getUserDetails(studentId)?.name ?: "N/A", score))
+            finish.emit(Unit)
         } catch (e: Exception) {
             _error.emit(e.message ?: "Error saving result")
         } finally {
