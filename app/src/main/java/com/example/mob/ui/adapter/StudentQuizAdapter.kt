@@ -4,14 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.mob.data.model.StudentQuiz
-import com.example.quizapp.R
+import com.example.mob.data.model.StudentQuizCompletion
 import com.example.quizapp.databinding.LayoutStudentRankingBinding
 
 class StudentQuizAdapter: RecyclerView.Adapter<StudentQuizAdapter.RankingViewHolder>() {
-    private var students: List<StudentQuiz> = emptyList()
+    private var students: List<StudentQuizCompletion> = emptyList()
 
-    fun submitList(list: List<StudentQuiz>) {
+    fun submitList(list: List<StudentQuizCompletion>) {
         students = list
         notifyDataSetChanged()
     }
@@ -23,8 +22,8 @@ class StudentQuizAdapter: RecyclerView.Adapter<StudentQuizAdapter.RankingViewHol
     }
 
     override fun onBindViewHolder(holder: RankingViewHolder, position: Int) {
-        val student = students[position]
-        holder.bind(student, position + 4)
+        val item = students[position]
+        holder.bind(item, position +1)
     }
 
     override fun getItemCount(): Int = students.size
@@ -33,14 +32,12 @@ class StudentQuizAdapter: RecyclerView.Adapter<StudentQuizAdapter.RankingViewHol
         private val binding: LayoutStudentRankingBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(student: StudentQuiz, rank: Int) {
+        fun bind(student: StudentQuizCompletion, rank: Int) {
             binding.run {
                 Glide.with(binding.root)
-                    .load(student.profilePicture)
-                    .placeholder(R.drawable.ic_person)
-                    .into(binding.ivStudentImage)
             }
-            binding.tvStudentName.text = "${student.firstName} ${student.lastName}"
+            binding.tvRanking.text = "${rank}. "
+            binding.tvStudentName.text = "${student.name}"
             binding.tvStudentScore.text = student.totalScore.toString()
 
         }

@@ -61,7 +61,6 @@ class EditQuizFragment : BaseAddEditQuizFragment() {
                 quiz?.let {
                     binding?.etQuizTitle?.setText(it.title)
                     binding?.etPublishDate?.setText(it.publishDate?.let { date -> date(date) })
-                    binding?.etExpiryDate?.setText(it.expiryDate?.let { date -> date(date) })
                     questionAdapter.setQuestions(it.questions)
                     questionAdapter.notifyDataSetChanged()
                 }

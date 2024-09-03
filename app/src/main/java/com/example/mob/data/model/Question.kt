@@ -5,11 +5,9 @@ data class Question(
     val questionText: String,
     val options: List<String>,
     val correctAnswer: String,
-    val timeLimit: Int = 15,
+    val timeLimit: Int = 30,
     val mark: Int = 1,
     val createdAt: Long = System.currentTimeMillis(),
-    val updatedBy: String? = null,
-    val updatedAt: Long? = null
 ) {
     fun toMap(): Map<String, Any?> {
         return hashMapOf(
@@ -20,8 +18,6 @@ data class Question(
             "timeLimit" to timeLimit,
             "mark" to mark,
             "createdAt" to createdAt,
-            "updatedBy" to updatedBy,
-            "updatedAt" to updatedAt
         )
     }
 
@@ -32,11 +28,9 @@ data class Question(
                 questionText = map["questionText"] as? String ?: "",
                 options = (map["options"] as? List<String>) ?: emptyList(),
                 correctAnswer = map["correctAnswer"] as? String ?: "",
-                timeLimit = map["timeLimit"] as? Int ?: 15,
+                timeLimit = map["timeLimit"] as? Int ?: 30,
                 mark = map["mark"] as? Int ?: 1,
                 createdAt = map["createdAt"] as? Long ?: System.currentTimeMillis(),
-                updatedBy = map["updatedBy"] as? String,
-                updatedAt = map["updatedAt"] as? Long
             )
         }
     }

@@ -1,7 +1,6 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.screens.teacher.addEditView.add.AddQuizFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,11 +15,18 @@
             android:text="Quiz Title"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-        <EditText
-            android:id="@+id/etQuizTitle"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter quiz title" />
+            android:layout_marginBottom="8dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etQuizTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter quiz title" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,35 +45,28 @@
                     android:text="Publish Date"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-                <EditText
-                    android:id="@+id/etPublishDate"
+<!--                <EditText-->
+<!--                    android:id="@+id/etPublishDate"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:focusable="false"-->
+<!--                    android:hint="Select Publish Date"-->
+<!--                    android:onClick="showPublishDatePicker" />-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:hint="Select Publish Date"
-                    android:onClick="showPublishDatePicker" />
-            </LinearLayout>
+                    android:layout_marginBottom="8dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginStart="@dimen/xxxxs"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:text="Expiry Date"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-
-                <EditText
-                    android:id="@+id/etExpiryDate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:hint="Select Expiry Date"
-                    android:onClick="showExpiryDatePicker" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPublishDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:hint="Select Publish Date"
+                        android:onClick="showPublishDatePicker"/>
+                </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
 
@@ -99,14 +98,12 @@
                 android:layout_marginTop="16dp" />
         </LinearLayout>
 
-        <!-- RecyclerView to Display Questions -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvQuestion"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:layout_marginTop="16dp" />
 
-        <!-- Save Quiz Button -->
         <Button
             android:id="@+id/btnSaveQuiz"
             android:layout_width="match_parent"

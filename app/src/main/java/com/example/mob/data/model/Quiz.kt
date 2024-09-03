@@ -5,32 +5,26 @@ import java.util.Date
 data class Quiz(
     val quizId: String,
     val title: String,
-//    val description: String? = null,
     val questions: List<Question> = emptyList(),
     val totalScore: Int = 0,
     val createdBy: String,
     val createdAt: Long = System.currentTimeMillis(),
-    val updatedBy: String? = null,
-    val updatedAt: Date? = null,
     val publishDate: Date? = null,
-    val expiryDate: Date? = null,
     val accessId: String = generateAccessId(),
+    val status: Boolean = false
 ) {
     fun toMap(): Map<String, Any?> {
         return hashMapOf(
             "quizId" to quizId,
             "title" to title,
-//            "description" to description,
             "questions" to questions.map { it.toMap() },
             "totalScore" to totalScore,
             "createdBy" to createdBy,
             "createdAt" to createdAt,
-            "updatedBy" to updatedBy,
-            "updatedAt" to updatedAt,
             "publishDate" to publishDate?.time,
-            "expiryDate" to expiryDate?.time,
             "accessId" to accessId,
-        )
+            "status" to status,
+            )
     }
 
 
@@ -44,16 +38,14 @@ data class Quiz(
             return Quiz(
                 quizId = map["quizId"] as? String ?: "",
                 title = map["title"] as? String ?: "",
-//                description = map["description"] as? String,
                 questions = questionsList,
                 totalScore = questionsList.sumOf { it.mark ?: 0 },
                 createdBy = map["createdBy"] as? String ?: "",
                 createdAt = map["createdAt"] as? Long ?: System.currentTimeMillis(),
-                updatedBy = map["updatedBy"] as? String,
-                updatedAt = map["updatedAt"]?.let { Date(it as Long) },
                 publishDate = map["publishDate"]?.let { Date(it as Long) },
-                expiryDate = map["expiryDate"]?.let { Date(it as Long) },
-                accessId = map["accessId"] as? String ?: ""
+                accessId = map["accessId"] as? String ?: "",
+                status = map["status"] as? Boolean ?: false
+
             )
         }
     }

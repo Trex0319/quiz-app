@@ -55,16 +55,19 @@
         <action
             android:id="@+id/action_dashboardFragment_to_addQuizFragment"
             app:destination="@id/addQuizFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_QuizViewFragment"
+            app:destination="@id/QuizViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/addQuizFragment"
         android:name="com.example.mob.ui.teacher.quiz.AddQuizFragment"
-        android:label="fragment_add_quiz"
+        android:label="Add Quiz"
         tools:layout="@layout/fragment_add_quiz" />
     <fragment
         android:id="@+id/editQuizFragment"
         android:name="com.example.mob.ui.teacher.editQuiz.EditQuizFragment"
-        android:label="fragment_edit_quiz"
+        android:label="Edit Quiz"
         tools:layout="@layout/fragment_edit_quiz" >
         <argument
             android:name="quizId"
@@ -76,11 +79,30 @@
     <fragment
         android:id="@+id/studentQuizFragment"
         android:name="com.example.mob.ui.student.StudentQuizFragment"
-        android:label="StudentQuizFragment"
+        android:label="Student Quiz"
         tools:layout="@layout/fragment_student_quiz">
     <argument
         android:name="quizId"
         app:argType="string" />
+        <action
+            android:id="@+id/action_studentQuizFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/QuizViewFragment"
+        android:name="com.example.mob.ui.teacher.view.QuizViewFragment"
+        android:label="Quiz"
+        tools:layout="@layout/fragment_quiz_view" >
+        <argument
+            android:name="quizId"
+            app:argType="string" />
+        <action
+            android:id="@+id/actionQuizViewToTeacherDashboard"
+            app:destination="@id/dashboardFragment" />
+        <action
+            android:id="@+id/actionQuizViewToHomeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 
 </navigation>

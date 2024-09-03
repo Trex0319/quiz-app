@@ -42,8 +42,7 @@ class StudentQuizViewModel @Inject constructor(
         try {
             if (!studentResultRepo.hasResult(quizId, studentId)) {
                 val user = userRepo.getUserDetails(studentId)
-                val name = user?.name ?: ""
-//                val profilePicture = user?.profilePicture ?: ""
+                val name = user?.name ?: "N/A"
 
                 val result = StudentResult(
                     studentId = studentId,
@@ -56,7 +55,6 @@ class StudentQuizViewModel @Inject constructor(
                 val completion = StudentQuizCompletion(
                     studentId = studentId,
                     name = name,
-//                    profilePicture = profilePicture,
                     totalScore = score
                 )
                 studentQuizRepo.addCompletion(completion)

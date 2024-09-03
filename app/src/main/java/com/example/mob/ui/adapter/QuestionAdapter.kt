@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mob.data.model.Question
-import com.example.mob.data.model.Quiz
-import com.example.quizapp.databinding.ItemtodoBinding
 import com.example.quizapp.databinding.LayoutQuestionCardBinding
 
 class QuestionAdapter(

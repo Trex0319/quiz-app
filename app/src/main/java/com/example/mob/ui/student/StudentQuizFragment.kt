@@ -112,7 +112,7 @@ class StudentQuizFragment : BaseFragment<FragmentStudentQuizBinding>() {
                 val totalScore = viewModel.calculateScore(quiz, selectedAnswers)
                 val studentId = viewModel.getCurrentUserId()
                 viewModel.saveResult(quizId, studentId, totalScore)
-//                showScoreDialog(totalScore)
+                showScoreDialog(totalScore)
             }
         }
     }
@@ -136,22 +136,22 @@ class StudentQuizFragment : BaseFragment<FragmentStudentQuizBinding>() {
         binding?.tvTimeCount?.text = String.format("%02d:%02d", minutes, seconds)
     }
 
-//    private fun showScoreDialog(score: Int) {
-//        val dialog = AlertDialog.Builder(requireContext())
-//            .setTitle("Quiz Completed")
-//            .setMessage("Your total score is $score")
-//            .setPositiveButton("OK") { _, _ ->
-//                findNavController().popBackStack()
-//            }
-//            .create()
-//        dialog.show()
-//        dialog.window?.decorView?.postDelayed({
-//            if (dialog.isShowing) {
-//                dialog.dismiss()
-//                findNavController().popBackStack()
-//            }
-//        }, 3000)
-//    }
+    private fun showScoreDialog(score: Int) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("Quiz Completed")
+            .setMessage("Your total score is $score")
+            .setPositiveButton("OK") { _, _ ->
+                view?.let { findNavController(it).popBackStack() }
+            }
+            .create()
+        dialog.show()
+        dialog.window?.decorView?.postDelayed({
+            if (dialog.isShowing) {
+                dialog.dismiss()
+                view?.let { findNavController(it).popBackStack() }
+            }
+        }, 3000)
+    }
 
 
     private fun loading() {

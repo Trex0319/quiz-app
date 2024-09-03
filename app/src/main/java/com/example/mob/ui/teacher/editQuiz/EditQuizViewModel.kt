@@ -30,14 +30,12 @@ class EditQuizViewModel @Inject constructor(
 
     override fun saveQuiz(
         title: String,
-        publishDate: String,
-        expiryDate: String,
+        publishDate: String
     ) {
         quiz.value?.let {
             val newQuiz = it.copy(
                 title = title,
                 publishDate = parsingDate(publishDate),
-                expiryDate = parsingDate(expiryDate),
                 questions = _questions.value
             )
             viewModelScope.launch {

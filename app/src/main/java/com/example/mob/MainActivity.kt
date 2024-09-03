@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -19,9 +20,11 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.mob.core.service.AuthService
+import com.example.mob.core.utils.UserRole
 import com.example.quizapp.R
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -106,15 +109,51 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnLogout.setOnClickListener {
-            authService.logout()
-            navController.navigate(
-                R.id.loginFragment,
-                null,
-                NavOptions.Builder()
-                    .setPopUpTo(R.id.homeFragment, true)
-                    .build()
-            )
-            alertDialog.dismiss()
+            lifecycleScope.launch {
+                val uid = authService.getUid()
+                if (uid != null) {
+                    val userRole = authService.getUserRole(uid)
+                    authService.logout()
+                    when (userRole) {
+                        UserRole.Student -> {
+                            navController.navigate(
+                                R.id.loginFragment,
+                                null,
+                                NavOptions.Builder()
+                                    .setPopUpTo(R.id.homeFragment, true)
+                                    .build()
+                            )
+                        }
+                        UserRole.Teacher -> {
+                            navController.navigate(
+                                R.id.loginFragment,
+                                null,
+                                NavOptions.Builder()
+                                    .setPopUpTo(R.id.dashboardFragment, true)
+                                    .build()
+                            )
+                        }
+                        else -> {
+                            navController.navigate(
+                                R.id.loginFragment,
+                                null,
+                                NavOptions.Builder()
+                                    .setPopUpTo(R.id.homeFragment, true)
+                                    .build()
+                            )
+                        }
+                    }
+                } else {
+                    navController.navigate(
+                        R.id.loginFragment,
+                        null,
+                        NavOptions.Builder()
+                            .setPopUpTo(R.id.loginFragment, true)
+                            .build()
+                    )
+                }
+                alertDialog.dismiss()
+            }
         }
 
         alertDialog.show()

@@ -1,10 +1,9 @@
 package com.example.mob.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.mob.data.model.StudentQuiz
+import com.example.mob.data.model.StudentQuizCompletion
 import com.example.mob.data.repo.QuizRepo
 import com.example.mob.data.repo.StudentQuizRepo
 import com.example.mob.data.repo.StudentResultRepo
@@ -22,14 +21,14 @@ class HomeViewModel @Inject constructor(
     private val resultRepo: StudentResultRepo
 ) : BaseViewModel() {
 
-    private val _completions = MutableLiveData<List<StudentQuiz>>()
-    val completions: LiveData<List<StudentQuiz>> get() = _completions
+    private val _completions = MutableLiveData<List<StudentQuizCompletion>>()
+    val completions: LiveData<List<StudentQuizCompletion>> get() = _completions
 
     fun loadCompletions() {
         viewModelScope.launch {
             studentQuizRepo.getAllCompletions().collect {
                 if (it.isNotEmpty()) {
-                    _completions.postValue(it.sortedByDescending { completion -> completion.totalScore })
+                    _completions.postValue(it.sortedByDescending { it.totalScore })
                 }
             }
         }

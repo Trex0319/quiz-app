@@ -51,14 +51,11 @@ class QuizAdapter : RecyclerView.Adapter<QuizAdapter.QuizViewHolder>() {
             binding.tvQuizTitle.text = quiz.title
 
             val publishDate = quiz.publishDate?.let { dateFormatter.format(it) } ?: ""
-            val expiryDate = quiz.expiryDate?.let { dateFormatter.format(it) } ?: ""
 
             binding.tvPublishDate.text = publishDate
-            binding.tvExpiryDate.text = expiryDate
 
             val currentDate = Date()
-            if ((quiz.publishDate != null && quiz.publishDate.after(currentDate)) ||
-                (quiz.expiryDate != null && quiz.expiryDate.before(currentDate))) {
+            if (quiz.publishDate != null && quiz.publishDate.after(currentDate)) {
                 binding.root.setBackgroundColor(R.color.red.toInt())
             } else {
                 binding.root.setBackgroundColor(Color.TRANSPARENT)

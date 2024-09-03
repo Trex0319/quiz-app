@@ -62,26 +62,8 @@ class QuizRepo @Inject constructor(private val authService: AuthService) {
         }
     }
 
-//    suspend fun getQuizIdByAccessId(accessId: String): String? {
-//        return try {
-//            val snapshot = getCollection()
-//                .whereEqualTo("accessId", accessId)
-//                .get()
-//                .await()
-//
-//            if (!snapshot.isEmpty) {
-//                snapshot.documents.firstOrNull()?.id
-//            } else {
-//                null
-//            }
-//        } catch (e: Exception) {
-//            null
-//        }
-//    }
-
     suspend fun getQuizIdByAccessId(accessId: String): String? {
         return try {
-            Log.d("debugging", "WORKs")
             val snapshot = getCollection()
                 .whereEqualTo("accessId", accessId)
                 .get()
@@ -93,7 +75,6 @@ class QuizRepo @Inject constructor(private val authService: AuthService) {
                 null
             }
         } catch (e: Exception) {
-            e.printStackTrace()
             null
         }
     }

@@ -22,10 +22,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
     override fun onBindView(view: View) {
         super.onBindView(view)
 
-//        val roles = UserRole.entries.map { it.name }
-//        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, roles)
-//        binding?.stRole?.setAdapter(adapter)
-
         binding?.btnLogin?.setOnClickListener {
             findNavController().navigate(
                 RegisterFragmentDirections.actionRegisterToLogin()

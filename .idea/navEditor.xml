@@ -8,13 +8,39 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="QuizViewFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="700" />
+                            <option name="y" value="-419" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="actionQuizViewToHomeFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="actionQuizViewToTeacherDashboard">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="addQuizFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="391" />
-                            <option name="y" value="-415" />
+                            <option name="x" value="415" />
+                            <option name="y" value="-409" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -26,11 +52,16 @@
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="49" />
-                            <option name="y" value="-431" />
+                            <option name="y" value="-446" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_dashboardFragment_to_QuizViewFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_dashboardFragment_to_addQuizFragment">
                               <value>
                                 <LayoutPositions />
@@ -75,6 +106,15 @@
                             <option name="x" value="72" />
                             <option name="y" value="-41" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_homeFragment_to_studentQuizFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -146,8 +186,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="680" />
-                            <option name="y" value="-376" />
+                            <option name="x" value="702" />
+                            <option name="y" value="-36" />
                           </Point>
                         </option>
                       </LayoutPositions>

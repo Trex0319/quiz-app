@@ -10,8 +10,8 @@ data class User(
     companion object {
         fun fromMap(map: Map<*,*>): User {
             return User(
-                name = map["Name"].toString(),
-                email = map["email"].toString(),
+                name = map["name"] as? String ?: "",
+                email = map["email"] as? String ?: "",
                 role =  UserRole.valueOf(map["role"] as? String ?: UserRole.Student.toString()),
                 )
         }

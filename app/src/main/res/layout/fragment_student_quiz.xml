@@ -73,7 +73,7 @@
                 android:textStyle="bold"
                 android:layout_weight="4"
                 android:layout_gravity="start"
-                android:text="Quiz Title"/>
+                android:text="Quiz"/>
 
             <TextView
                 android:id="@+id/tvTime"

@@ -23,10 +23,6 @@ class LoginViewModel @Inject constructor (
     private val userRepo: UserRepo,
 ) : BaseViewModel() {
 
-//    val success: MutableSharedFlow<Unit> = MutableSharedFlow()
-//    private val _isLoading = MutableStateFlow(false)
-//    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
-
     fun login(email: String, pass: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _isLoading.emit(true)

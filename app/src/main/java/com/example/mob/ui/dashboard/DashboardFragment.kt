@@ -63,10 +63,15 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>() {
         binding?.rvQuiz?.adapter = quizAdapter
         binding?.rvQuiz?.layoutManager = layoutManager
 
-        quizAdapter.listener = object: QuizAdapter.Listener {
+        quizAdapter.listener = object : QuizAdapter.Listener {
             override fun onClick(quiz: Quiz) {
-                TODO()
+                quiz.quizId.let {
+                    findNavController(this@DashboardFragment).navigate(
+                        DashboardFragmentDirections.actionDashboardFragmentToQuizViewFragment(it)
+                    )
+                }
             }
+
 
             override fun onClickEdit(quiz: Quiz) {
                 quiz.quizId.let {

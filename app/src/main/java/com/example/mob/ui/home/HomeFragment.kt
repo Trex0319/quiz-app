@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mob.core.service.StorageService
-import com.example.mob.data.model.StudentQuiz
+import com.example.mob.data.model.StudentQuizCompletion
 import com.example.mob.ui.adapter.StudentQuizAdapter
 import com.example.mob.ui.base.BaseFragment
 import com.example.quizapp.R
@@ -27,11 +27,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     @Inject
     lateinit var storageService: StorageService
     override val viewModel: HomeViewModel by viewModels()
-    private lateinit var studentQuizCompletionAdapter: StudentQuizAdapter
+    private lateinit var studentQuizAdapter: StudentQuizAdapter
     override fun getLayoutResource() = R.layout.fragment_home
 
     override fun onBindView(view: View) {
         super.onBindView(view)
+        studentQuizAdapter = StudentQuizAdapter()
         viewModel.loadCompletions()
         viewModel.completions.observe(viewLifecycleOwner) { completions ->
             if (completions.isNotEmpty()) {
@@ -111,101 +112,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
 
-    private fun setupRankingViews(completions: List<StudentQuiz>) {
-//        Log.d("StudentHomeFragment", "Completions received: ${completions.size}")
-
+    private fun setupRankingViews(completions: List<StudentQuizCompletion>) {
         val sortedCompletions = completions.sortedByDescending { it.totalScore }
-        val top3 = sortedCompletions.take(3)
-        val fourToTen = sortedCompletions.drop(3)
+        val topTen = sortedCompletions.take(10)
 
-//        Log.d("StudentHomeFragment", "Top 3: $top3")
-//        Log.d("StudentHomeFragment", "Remaining: $fourToTen")
-
-//        if (top3.isNotEmpty()) {
-//            binding?.top3Container?.visibility = View.VISIBLE
-//            binding?.tvNoRanking?.visibility = View.GONE
-//
-//            when (top3.size) {
-//                1 -> {
-//                    setupFirstPlace(top3[0])
-//                    hideSecondAndThirdPlace()
-//                }
-//                2 -> {
-//                    setupFirstPlace(top3[0])
-//                    setupSecondPlace(top3[1])
-//                    hideThirdPlace()
-//                }
-//                else -> {
-//                    setupFirstPlace(top3[0])
-//                    setupSecondPlace(top3[1])
-//                    setupThirdPlace(top3[2])
-//                }
-//            }
-//        } else {
-//            binding?.top3Container?.visibility = View.GONE
-//            binding?.tvNoRanking?.visibility = View.VISIBLE
-//        }
-
-        if (fourToTen.isNotEmpty()) {
+        if (topTen.isNotEmpty()) {
             binding?.rvRankings?.visibility = View.VISIBLE
-            studentQuizCompletionAdapter.submitList(fourToTen)
-            binding?.rvRankings?.adapter = studentQuizCompletionAdapter
+            studentQuizAdapter.submitList(topTen)
+            binding?.rvRankings?.adapter = studentQuizAdapter
             binding?.rvRankings?.layoutManager = LinearLayoutManager(requireContext())
+            binding?.tvNoRanking?.visibility = View.GONE
         } else {
             binding?.rvRankings?.visibility = View.GONE
+            binding?.tvNoRanking?.visibility = View.VISIBLE
         }
     }
 
-    private fun setupFirstPlace(completion: StudentQuiz) {
-        binding?.ivFirstPlace?.visibility = View.VISIBLE
-        binding?.tvFirstPlaceName?.visibility = View.VISIBLE
-        binding?.tvFirstPlaceScore?.visibility = View.VISIBLE
-        binding?.tvFirstPlaceName?.text = "${completion.firstName} ${completion.lastName}"
-        binding?.tvFirstPlaceScore?.text = completion.totalScore.toString()
-//        showProfileImage(binding?.ivFirstPlace!!, completion.profilePicture)
-    }
-
-    private fun setupSecondPlace(completion: StudentQuiz) {
-        binding?.ivSecondPlace?.visibility = View.VISIBLE
-        binding?.tvSecondPlaceName?.visibility = View.VISIBLE
-        binding?.tvSecondPlaceScore?.visibility = View.VISIBLE
-        binding?.tvSecondPlaceName?.text = "${completion.firstName} ${completion.lastName}"
-        binding?.tvSecondPlaceScore?.text = completion.totalScore.toString()
-//        showProfileImage(binding?.ivSecondPlace!!, completion.profilePicture)
-    }
-
-    private fun setupThirdPlace(completion: StudentQuiz) {
-        binding?.ivThirdPlace?.visibility = View.VISIBLE
-        binding?.tvThirdPlaceName?.visibility = View.VISIBLE
-        binding?.tvThirdPlaceScore?.visibility = View.VISIBLE
-        binding?.tvThirdPlaceName?.text = "${completion.firstName} ${completion.lastName}"
-        binding?.tvThirdPlaceScore?.text = completion.totalScore.toString()
-//        showProfileImage(binding?.ivThirdPlace!!, completion.profilePicture)
-    }
-
-//    private fun hideSecondAndThirdPlace() {
-//        binding?.ivSecondPlace?.visibility = View.GONE
-//        binding?.tvSecondPlaceName?.visibility = View.GONE
-//        binding?.tvSecondPlaceScore?.visibility = View.GONE
-//        binding?.ivThirdPlace?.visibility = View.GONE
-//        binding?.tvThirdPlaceName?.visibility = View.GONE
-//        binding?.tvThirdPlaceScore?.visibility = View.GONE
-//    }
-
-//    private fun hideThirdPlace() {
-//        binding?.ivThirdPlace?.visibility = View.GONE
-//        binding?.tvThirdPlaceName?.visibility = View.GONE
-//        binding?.tvThirdPlaceScore?.visibility = View.GONE
-//    }
-
-//    private fun showProfileImage(imageView: ImageView, imageName: String?) {
-//        if (imageName.isNullOrEmpty()) return
-//        storageService.getImageUri(imageName) { uri ->
-//            Glide.with(this@StudentHomeFragment)
-//                .load(uri)
-//                .placeholder(R.drawable.ic_person)
-//                .centerCrop()
-//                .into(imageView)
-//        }
-//    }
 }

@@ -5,22 +5,22 @@
         android:id="@+id/cvQuiz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp">
+        android:layout_margin="10dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="12dp"
+            android:padding="16dp"
             android:baselineAligned="false">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:layout_marginStart="16dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -28,75 +28,59 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Quiz"
-                    android:textSize="18sp"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:textColor="?attr/colorOnBackground"
                     android:textStyle="bold" />
-
-                <!--            <TextView-->
-                <!--                android:id="@+id/tvQuizDescription"-->
-                <!--                android:layout_width="wrap_content"-->
-                <!--                android:layout_height="wrap_content"-->
-                <!--                android:text="@string/description"-->
-                <!--                android:textSize="14sp" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Publish date"
-                        android:textSize="14sp" />
+                        android:text="Publish date: "
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textColor="?attr/colorOnBackground" />
 
                     <TextView
                         android:id="@+id/tvPublishDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Date"
-                        android:textSize="14sp" />
+                        android:text="2024-09-02"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textColor="?attr/colorPrimary" />
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expiry date"
-                        android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/tvExpiryDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Date"
-                        android:textSize="14sp" />
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
 
                     <TextView
                         android:id="@+id/tvAccessId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Access ID: 123456"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/black" />
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        android:textColor="?attr/colorOnBackground" />
 
                     <Button
                         android:id="@+id/btnCopyAccessId"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:text="  Copy  "
-                        android:layout_marginHorizontal="10dp"
-                        android:paddingHorizontal="8dp"
-                        android:textSize="14sp" />
+                        android:layout_marginStart="10dp"
+                        android:text="Copy"
+                        android:textSize="14sp"
+                        android:paddingHorizontal="12dp"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        app:cornerRadius="8dp" />
                 </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -104,24 +88,23 @@
                 android:layout_gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/ivEdit"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_margin="@dimen/xxxxs"
-                    android:layout_gravity="center"
-                    android:contentDescription="Profile picture"
-                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Edit"
+                    android:padding="8dp"
                     android:src="@drawable/ic_edit" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/ivDelete"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_margin="@dimen/xxxxs"
-                    android:layout_gravity="center"
-                    android:contentDescription="Profile picture"
-                    android:scaleType="centerCrop"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="Delete"
+                    android:padding="8dp"
                     android:src="@drawable/ic_delete" />
 
             </LinearLayout>

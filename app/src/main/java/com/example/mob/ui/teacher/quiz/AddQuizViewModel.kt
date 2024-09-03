@@ -19,7 +19,7 @@ class AddQuizViewModel @Inject constructor(
     private val _questions = MutableStateFlow<List<Question>>(emptyList())
     val questions: StateFlow<List<Question>> = _questions
 
-    override fun saveQuiz(title: String, publishDate: String, expiryDate: String) {
+    override fun saveQuiz(title: String, publishDate: String) {
         viewModelScope.launch {
             try {
                 val quiz = Quiz(
@@ -27,7 +27,6 @@ class AddQuizViewModel @Inject constructor(
                     title = title,
                     questions = _questions.value,
                     publishDate = parsingDate(publishDate),
-                    expiryDate = parsingDate(expiryDate),
                     createdBy = "",
                 )
                 quizRepository.addQuiz(quiz)

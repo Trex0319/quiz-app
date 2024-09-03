@@ -25,5 +25,5 @@ abstract class BaseAddEditQuizViewModel : BaseViewModel() {
         }
     }
 
-    abstract fun saveQuiz(title: String, publishDate: String, expiryDate: String)
+    abstract fun saveQuiz(title: String, publishDate: String)
 }

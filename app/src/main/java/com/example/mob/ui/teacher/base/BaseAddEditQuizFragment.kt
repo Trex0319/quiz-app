@@ -20,16 +20,11 @@ abstract class BaseAddEditQuizFragment : BaseFragment<FragmentAddEditQuizBinding
             showPublishDatePicker(it)
         }
 
-        binding?.etExpiryDate?.setOnClickListener {
-            showExpiryDatePicker(it)
-        }
-
         binding?.btnSaveQuiz?.setOnClickListener {
             val title = binding?.etQuizTitle?.text.toString()
             val publishDate = binding?.etPublishDate?.text.toString()
-            val expiryDate = binding?.etExpiryDate?.text.toString()
 
-            viewModel.saveQuiz(title, publishDate, expiryDate)
+            viewModel.saveQuiz(title, publishDate)
         }
 
     }
@@ -44,22 +39,6 @@ abstract class BaseAddEditQuizFragment : BaseFragment<FragmentAddEditQuizBinding
             requireContext(),
             { _, selectedYear, selectedMonth, selectedDay ->
                 binding?.etPublishDate?.setText("$selectedYear-${selectedMonth + 1}-$selectedDay")
-            },
-            year, month, day
-        )
-        datePickerDialog.show()
-    }
-
-    private fun showExpiryDatePicker(view: View) {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { _, selectedYear, selectedMonth, selectedDay ->
-                binding?.etExpiryDate?.setText("$selectedYear-${selectedMonth + 1}-$selectedDay")
             },
             year, month, day
         )
